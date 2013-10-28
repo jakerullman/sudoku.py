@@ -84,7 +84,7 @@ class Sudoku(dict):
                 options[val] = options.setdefault(val, 0) + 1
             for option, freq in options.iteritems():
                 optlen = len(option)
-                if optlen == freq: # remove these stupid options from all others
+                if optlen == freq: # remove these options from all others
                     for loc in area.keys():
                         selfloc = self[loc]
                         if selfloc != option:
@@ -112,11 +112,11 @@ class Sudoku(dict):
                     trial = self.copy()  # make a copy of the puzzle
                     trial[cell] = option # and assume a value
                     try:
-                        if trial.solve(): # fuck yeah, it worked, copy values back to self
+                        if trial.solve(): # aww yeah, it worked, copy values back to self
                             for cell, options in trial.iteritems():
                                 self[cell] = options
                             return True
-                    except SudokuException: # shit, did not work, remove and simplify
+                    except SudokuException: # oh crap, did not work, remove and simplify
                         self[cell] = self[cell].replace(option, '')
                         if self.simplify():
                             return True
